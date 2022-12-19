@@ -43,10 +43,11 @@ def main():
     bubbles_visible = 20
     bubbles = []
 
-    spike_arrays = 2
-    spike_heights = [i for i in range(-SCREEN_HEIGHT, 0, 2*BALLOON_HEIGHT)]
+    max_spike_arrays = 5
     max_spikes = SCREEN_WIDTH//SPIKE_WIDTH
     spikes = []
+
+    now = pygame.time.get_ticks()
 
     # Screen refresh function
     def redrawWindow():
@@ -76,14 +77,13 @@ def main():
             bubbles.append(Bubbles(random.randint(0,SCREEN_WIDTH-BUBBLE_WIDTH),random.randint(-SCREEN_HEIGHT,0),30,30,BUBBLE_IMAGE))
 
         # Create spikes
-        if len(spikes) < spike_arrays:
-            spike_height = random.choice(spike_heights)
-            gap_index = random.randint(0,max_spikes-((2*BALLOON_WIDTH)//SPIKE_WIDTH))
-            gap_length = random.randint(8, max_spikes-gap_index)
-            spikes.append(SpikeArray(spike_height, SPIKE_WIDTH, SPIKE_HEIGHT, SPIKE_IMAGE, max_spikes, spike_height, gap_index, gap_length))
-            for i in spike_heights:
-                if i >= spike_height:
-                    spike_heights.remove(i)
+        if len(spikes) < max_spike_arrays:
+            time_difference = pygame.time.get_ticks() - now
+            if time_difference >= random.randint(2000, 4800):
+                gap_index = random.randint(0,max_spikes-((2*BALLOON_WIDTH)//SPIKE_WIDTH))
+                gap_length = random.randint(8, max_spikes-gap_index)
+                spikes.append(SpikeArray(-SPIKE_HEIGHT, SPIKE_WIDTH, SPIKE_HEIGHT, SPIKE_IMAGE, max_spikes, gap_index, gap_length))
+                now = pygame.time.get_ticks()
 
         # Event listener
         for event in pygame.event.get():
@@ -108,9 +108,7 @@ def main():
 
         for spike_array in spikes[:]:
             spike_array.moveWithVelocity(0,RISING_SPEED)
-            print(spike_array.y > SCREEN_HEIGHT-100)
-            if spike_array.y > SCREEN_HEIGHT-100:
-                spike_heights.append(spike_array.getInitHeight())
+            if spike_array.y > SCREEN_HEIGHT:
                 spikes.remove(spike_array)
         
         for bubble in bubbles[:]:
