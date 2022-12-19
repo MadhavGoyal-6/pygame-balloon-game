@@ -48,6 +48,46 @@ def selfCollision(self, object):
 Spikes.collision = selfCollision
 Bubbles.collision = selfCollision
 
+# Main menu
+def main_menu():
+    
+    # Initialize variables
+    EXIT = False
+    CLOCK = pygame.time.Clock()
+
+    # Load Cascadia Code font in size 50 pygame
+    CascadiaCode = pygame.font.SysFont("Cascadia Code", 50)
+
+    # Main loop
+    while not EXIT:
+
+        # Set FPS
+        CLOCK.tick(FPS)
+
+        # Clear screen
+        WIN.fill(COLOR_WHITE)
+
+        # Write title
+        title_text = CascadiaCode.render("Click To begin", True, (0,0,0))
+        WIN.blit(title_text, (SCREEN_WIDTH//2-title_text.get_width()//2, SCREEN_HEIGHT//2-title_text.get_height()//2))
+
+        # Update display
+        pygame.display.update()
+
+        # Event loop
+        for event in pygame.event.get():
+
+            # Start game
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    main()
+
+            # Quit game
+            if event.type == pygame.QUIT:
+                EXIT = True
+
+    pygame.quit()
+
 # Main loop
 def main():
 
@@ -57,7 +97,7 @@ def main():
     balloon_moving = False
     score = 0
 
-    # Load Cascadia Code font in size 20 pygame
+    # Load Cascadia Code font in size 30 pygame
     CascadiaCode = pygame.font.SysFont("Cascadia Code", 30)
 
     # Set bubble parameters
@@ -149,7 +189,8 @@ def main():
         # Check if balloon collides with spikes
         for spike_array in spikes:
             if spike_array.collision(balloon):
-                EXIT = True
+                balloon_moving = False
+                main_menu()
 
         # Remove Spikes if they are off screen
         for spike_array in spikes[:]:
