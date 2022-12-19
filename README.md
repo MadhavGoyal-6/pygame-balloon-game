@@ -10,6 +10,8 @@
 
 ## Install
 
+Clone this repo then
+
 ```sh
 pip install -r requirements.txt
 ```
