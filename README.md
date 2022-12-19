@@ -5,6 +5,7 @@
 > Pygame implementation of balloon rising game found in Google Play Store
 
 ## Install
+Clone this repo then
 
 ```sh
 pip install -r requirements.txt
