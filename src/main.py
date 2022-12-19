@@ -1,6 +1,7 @@
 import random
 import pygame
 import os
+
 from Balloon import Balloon
 from Bubbles import Bubbles
 from Spikes import Spikes, SpikeArray
@@ -18,7 +19,7 @@ RISING_SPEED = 2
 FPS = 60
 
 # Make main window
-win = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+WIN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Rising Balloon")
 
 # Import image assets
@@ -49,6 +50,7 @@ Bubbles.collision = selfCollision
 
 # Main loop
 def main():
+
     # Initialize variables
     EXIT = False
     CLOCK = pygame.time.Clock()
@@ -72,27 +74,27 @@ def main():
 
     # Screen refresh function
     def redrawWindow():
+
         # Clear screen
-        win.fill(COLOR_WHITE)
+        WIN.fill(COLOR_WHITE)
 
         # Draw bubbles
         for bubble in bubbles:
-            bubble.draw(win)
+            bubble.draw(WIN)
         
         # Draw spikes
         for spike_array in spikes:
-            spike_array.draw(win)
+            spike_array.draw(WIN)
 
         # Write score
         score_text = CascadiaCode.render("Score: " + str(score), True, (0,0,0))
-        win.blit(score_text, (10,10))
+        WIN.blit(score_text, (10,10))
 
         # Draw balloon
-        balloon.draw(win)
+        balloon.draw(WIN)
 
         # Update display
         pygame.display.update()
-
 
     while not EXIT:
         CLOCK.tick(FPS)
