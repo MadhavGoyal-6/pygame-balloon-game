@@ -1,0 +1,7 @@
+# venv file and folders
+Include
+Lib
+Scripts
+*.cfg
+__pycache__
+.vscode
