@@ -1,3 +1,5 @@
+import pygame
+
 class Balloon():
     def __init__(self, x, y, w, h, image):
         self.x = x
@@ -5,6 +7,7 @@ class Balloon():
         self.w = w
         self.h = h
         self.image = image
+        self.mask = pygame.mask.from_surface(self.image)
 
     def draw(self, win):
         win.blit(self.image, (self.x,self.y))

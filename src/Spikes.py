@@ -1,3 +1,5 @@
+import pygame
+
 class Spikes():
     def __init__(self, x, y, w, h, image):
         self.x = x
@@ -5,6 +7,7 @@ class Spikes():
         self.w = w
         self.h = h
         self.image = image
+        self.mask = pygame.mask.from_surface(self.image)
     
     def draw(self, win):
         win.blit(self.image, (self.x,self.y))
@@ -40,3 +43,9 @@ class SpikeArray():
         for i in range(len(self.array)):
             if self.array[i] is not None:
                 self.array[i].moveWithVelocity(x_vel, y_vel)
+
+    def collision(self, object):
+        for i in self.array:
+            if i is not None:
+                if i.collision(object):
+                    return True
