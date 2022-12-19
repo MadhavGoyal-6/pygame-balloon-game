@@ -4,6 +4,10 @@
 
 > Pygame implementation of balloon rising game found in Google Play Store
 
+## Screenshot
+
+![Screenshot](Screenshot.png)
+
 ## Install
 
 ```sh
@@ -20,11 +24,12 @@ cd src && python3 main.py
 
 👤 **Madhav Goyal**
 
-* Github: [@MadhavGoyal-6](https://github.com/MadhavGoyal-6)
+- Github: [@MadhavGoyal-6](https://github.com/MadhavGoyal-6)
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
 
-***
+---
+
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
